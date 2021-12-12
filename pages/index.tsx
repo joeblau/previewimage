@@ -1,13 +1,20 @@
-import type { NextPage } from "next";
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  NextPage,
+} from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 
-const Home: NextPage = () => {
+interface MetaTag {
+  image: string;
+  title: string;
+}
+
+const Home: NextPage = ({ meta }: any) => {
   const router = useRouter();
-  const { t } = router.query;
-  const stringTitle = t == null ? "Test" : String(t);
 
   return (
     <div className={styles.container}>
@@ -17,19 +24,15 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
 
         <meta property="og:url" content={router.pathname} key="ogurl" />
-        <meta
-          property="og:image"
-          content={`https://via.placeholder.com/600/0000FF/FFF?text=${stringTitle}`}
-          key="ogimage"
-        />
+        <meta property="og:image" content={meta.image} key="ogimage" />
         <meta property="og:site_name" content="" key="ogsitename" />
-        <meta property="og:title" content={stringTitle} key="ogtitle" />
+        <meta property="og:title" content={meta.title} key="ogtitle" />
         <meta property="og:description" content="Shane test" key="ogdesc" />
-        <title>{t}</title>
+        <title>{meta.title}</title>
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to {stringTitle}</h1>
+        <h1 className={styles.title}>Welcome to {meta.title}</h1>
 
         <p className={styles.description}>
           Get started by editing{" "}
@@ -81,6 +84,22 @@ const Home: NextPage = () => {
       </footer>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+}: GetServerSidePropsContext) => {
+  const { t } = query;
+  const stringTitle = t == null ? "Test" : String(t);
+
+  const meta: MetaTag = {
+    image: `https://via.placeholder.com/600/0000FF/FFF?text=${stringTitle}`,
+    title: stringTitle,
+  };
+
+  return {
+    props: { meta }, // will be passed to the page component as props
+  };
 };
 
 export default Home;
