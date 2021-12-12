@@ -93,7 +93,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const stringTitle = t == null ? "Test" : String(t);
 
   const meta: MetaTag = {
-    image: `https://via.placeholder.com/600/0000FF/FFF?text=${stringTitle}`,
+    image: `https://via.placeholder.com/1200x630/222/DDD?text=${stringTitle}`,
     title: stringTitle,
   };
 
