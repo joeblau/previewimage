@@ -24,7 +24,7 @@ const Home: NextPage = () => {
         />
         <meta property="og:site_name" content="" key="ogsitename" />
         <meta property="og:title" content={stringTitle} key="ogtitle" />
-        <meta property="og:description" content="Shane is wrong" key="ogdesc" />
+        <meta property="og:description" content="Shane test" key="ogdesc" />
         <title>{t}</title>
       </Head>
 
