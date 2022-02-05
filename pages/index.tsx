@@ -37,7 +37,11 @@ const Home: NextPage = ({ meta }: any) => {
         <title>{meta.title}</title>
       </Head>
 
-      <main className={styles.main}>Hello World</main>
+      <main className={styles.main}>
+        <h1 className={styles.title}>Welcome to {meta.title}</h1>
+
+        <a href="twitter://edit_profile"> Open Twitter Profile</a>
+      </main>
 
       <footer className={styles.footer}>
         <a
